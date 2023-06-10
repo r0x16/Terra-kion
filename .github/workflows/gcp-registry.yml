@@ -22,4 +22,5 @@ jobs:
             gcp-gcr-region: gcr.io
             image-name: terra-kion
             image-sources: Dockerfile
+            github-token: ${{ secrets.GITHUB_TOKEN }}
   
