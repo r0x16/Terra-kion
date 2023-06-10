@@ -21,6 +21,6 @@ jobs:
             gcp-service-account-key: ${{ secrets.GCP_SA_KEY }}
             gcp-gcr-region: gcr.io
             image-name: terra-kion
-            image-sources: .,Dockerfile
+            image-sources: ./*,Dockerfile
             github-token: ${{ secrets.GITHUB_TOKEN }}
   
