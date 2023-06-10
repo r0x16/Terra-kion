@@ -10,17 +10,22 @@ jobs:
     build-and-push:
         name: Builds container and push to GCP
         runs-on: ubuntu-latest
+        env:
+          IMAGE_NAME: terra-kion
         steps:
         - name: Checkout
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         
-        - name: Build Docker Image
-          uses: FlowSquad/docker-cloud-build@v1.0.1
+        - id: 'auth'
+          name: 'Authenticate to Google Cloud'
+          uses: 'google-github-actions/auth@v1'
           with:
-            gcp-project-id: ${{ secrets.GCP_PROJECT_ID }}
-            gcp-service-account-key: ${{ secrets.GCP_SA_KEY }}
-            gcp-gcr-region: gcr.io
-            image-name: terra-kion
-            image-sources: Dockerfile
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-  
+            credentials_json: ${{ secrets.GCP_SA_KEY }}
+        
+        - name: 'Set up Cloud SDK'
+          uses: 'google-github-actions/setup-gcloud@v1'
+          with:
+            version: '>= 434.0.0'
+
+        - name: 'Use gcloud CLI'
+          run: 'gcloud info'
