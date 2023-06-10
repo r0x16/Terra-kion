@@ -1,0 +1,25 @@
+---
+name: Build and push containerized application to GCP Container Registry
+on:
+  push:
+  release:
+    types:
+      - published
+
+jobs:
+    build-and-push:
+        name: Builds container and push to GCP
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout
+          uses: actions/checkout@v2
+        
+        - name: Build Docker Image
+          uses: FlowSquad/docker-cloud-build@v1.0.1
+          with:
+            gcp-project-id: ${{ secrets.GCP_PROJECT_ID }}
+            gcp-service-account-key: ${{ secrets.GCP_SA_KEY }}
+            gcp-gcr-region: gcr.io
+            image-name: terra-kion
+            image-sources: .,Dockerfile
+  
