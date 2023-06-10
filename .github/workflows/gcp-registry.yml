@@ -1,7 +1,6 @@
 ---
 name: Build and push containerized application to GCP Container Registry
 on:
-  push:
   release:
     types:
       - published
