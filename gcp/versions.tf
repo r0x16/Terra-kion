@@ -7,6 +7,12 @@ terraform {
       source  = "hashicorp/google"
       version = "4.68.0"
     }
+
+    # Kubernetes provider
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = "2.21.1"
+    }
   }
 
   # State is stored in a GCS bucket.

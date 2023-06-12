@@ -7,6 +7,16 @@ provider "google" {
   zone    = var.zone
 }
 
+# Extracts the access token and cluster certificate from the GKE module.
+data "google_client_config" "default" {}
+
+# Configures the Kubernetes provider.
+provider "kubernetes" {
+  host                   = "https://${module.gke.endpoint}"
+  token                  = data.google_client_config.default.access_token
+  cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+}
+
 # Enables the required APIs.
 /* resource "google_project_service" "compute" {
   service = "compute.googleapis.com"
