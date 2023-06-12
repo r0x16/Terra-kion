@@ -7,7 +7,7 @@ import (
 
 type ApplicationBundle struct {
 	Server   *echo.Echo
-	Database *db.NoDatabaseProvider
+	Database *db.GormPostgresDatabaseProvider
 }
 
 type ActionCallback func(echo.Context, *ApplicationBundle) error

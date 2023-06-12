@@ -15,7 +15,7 @@ func (m *Main) RunServices() {
 	m.mainService = &app.MainService{}
 
 	// Creates a new application bundle
-	dbProvider := &db.NoDatabaseProvider{}
+	dbProvider := &db.GormPostgresDatabaseProvider{}
 	app := &framework.EchoApplicationProvider{
 		Bundle: &drivers.ApplicationBundle{
 			Database: dbProvider,
