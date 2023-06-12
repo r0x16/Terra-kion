@@ -64,3 +64,8 @@ variable "database_port" {
   description = "The database connection port."
   default     = "5432"
 }
+
+variable "database_version" {
+  description = "The database version."
+  default     = "POSTGRES_15"
+}

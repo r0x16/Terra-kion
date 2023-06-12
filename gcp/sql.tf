@@ -13,7 +13,7 @@ module "pgsql" {
   project_id                  = var.project
   region                      = var.region
   zone                        = var.zone
-  database_version            = "POSTGRES_15"
+  database_version            = var.database_version
   db_name                     = var.project
   user_name                   = var.database_user
   deletion_protection         = false
