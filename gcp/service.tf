@@ -46,6 +46,27 @@ resource "kubernetes_deployment" "terra-kion" {
             name  = "CRODONT_PORT"
             value = "8080"
           }
+          env {
+            name  = "DB_HOST"
+            value = module.pgsql.private_ip_address
+          }
+          env {
+            name  = "DB_PORT"
+            value = var.database_port
+          }
+          env {
+            name  = "DB_USER"
+            value = var.database_user
+          }
+          env {
+            name  = "DB_PASSWORD"
+            value = module.pgsql.generated_user_password
+          }
+          env {
+            name  = "DB_DATABASE"
+            value = var.project
+          }
+
           resources {
             requests = {
               cpu    = "250m"

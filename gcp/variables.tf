@@ -39,3 +39,13 @@ variable "ip_range_services" {
   description = "The IP range for GKE services."
   default     = "172.21.0.0/16"
 }
+
+variable "database_user" {
+  description = "The database default username."
+  default     = "r0x16"
+}
+
+variable "database_port" {
+  description = "The database connection port."
+  default     = "5432"
+}
