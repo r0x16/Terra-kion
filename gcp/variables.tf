@@ -7,7 +7,7 @@ variable "project" {
 
 variable "deploy_tag" {
   description = "The version to deploy in the service."
-  default     = "v0.0.1"
+  default     = "latest"
 }
 
 variable "deploy_image" {
