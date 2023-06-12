@@ -26,4 +26,25 @@ provider "kubernetes" {
 resource "google_project_service" "container" {
   service = "container.googleapis.com"
   disable_dependent_services=true
-} */
+}
+
+resource "google_project_service" "dns" {
+  service = "dns.googleapis.com"
+  disable_dependent_services=true
+}
+
+resource "google_project_service" "sqladmin" {
+  service = "sqladmin.googleapis.com"
+  disable_dependent_services=true
+}
+
+resource "google_project_service" "servicenetworking" {
+  service = "servicenetworking.googleapis.com"
+  disable_dependent_services=true
+}
+
+resource "google_project_service" "cloudresourcemanager" {
+  service = "cloudresourcemanager.googleapis.com"
+  disable_dependent_services=true
+}
+*/
