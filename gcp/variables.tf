@@ -5,6 +5,21 @@ variable "project" {
   default     = "terra-kion"
 }
 
+variable "deploy_tag" {
+  description = "The version to deploy in the service."
+  default     = "v0.0.1"
+}
+
+variable "deploy_image" {
+  description = "The image to deploy in the service."
+  default     = "gcr.io/terra-kion/terra-kion"
+}
+
+variable "deploy_namespace" {
+  description = "The namespace to deploy in the service."
+  default     = "production"
+}
+
 variable "service_account" {
   description = "The service account to deploy resources."
   default     = "terra-kion@terra-kion.iam.gserviceaccount.com"
@@ -48,4 +63,9 @@ variable "database_user" {
 variable "database_port" {
   description = "The database connection port."
   default     = "5432"
+}
+
+variable "database_version" {
+  description = "The database version."
+  default     = "POSTGRES_15"
 }

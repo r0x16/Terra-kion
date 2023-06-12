@@ -10,14 +10,14 @@
 # Define the namespace
 resource "kubernetes_namespace" "example" {
   metadata {
-    name = "production"
+    name = var.deploy_namespace
   }
 }
 
 # Define the deployment
 resource "kubernetes_deployment" "terra-kion" {
   metadata {
-    name      = "terra-kion"
+    name      = var.project
     namespace = kubernetes_namespace.example.metadata[0].name
   }
 
@@ -25,20 +25,20 @@ resource "kubernetes_deployment" "terra-kion" {
     replicas = 2
     selector {
       match_labels = {
-        app = "terra-kion"
+        app = var.project
       }
     }
     template {
       metadata {
         labels = {
-          app = "terra-kion"
+          app = var.project
         }
         namespace = kubernetes_namespace.example.metadata[0].name
       }
       spec {
         container {
-          image = "gcr.io/terra-kion/terra-kion:latest"
-          name  = "terra-kion"
+          image = "${var.deploy_image}:${var.deploy_tag}"
+          name  = var.project
           port {
             container_port = 8080
           }
@@ -104,7 +104,7 @@ resource "kubernetes_deployment" "terra-kion" {
 # Define a Load Balanced service
 resource "kubernetes_service" "terra-kion" {
   metadata {
-    name      = "terra-kion"
+    name      = var.project
     namespace = kubernetes_namespace.example.metadata[0].name
   }
 

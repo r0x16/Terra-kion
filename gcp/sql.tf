@@ -7,15 +7,16 @@
 #
 
 module "pgsql" {
-  source           = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
-  version          = "15.0.0"
-  name             = "${var.project}-pgsql"
-  project_id       = var.project
-  region           = var.region
-  zone             = var.zone
-  database_version = "POSTGRES_15"
-  db_name          = var.project
-  user_name        = var.database_user
+  source                      = "GoogleCloudPlatform/sql-db/google//modules/postgresql"
+  version                     = "15.0.0"
+  name                        = "${var.project}-pgsql"
+  project_id                  = var.project
+  region                      = var.region
+  zone                        = var.zone
+  database_version            = var.database_version
+  db_name                     = var.project
+  user_name                   = var.database_user
+  deletion_protection         = false
 
   # Allow access to the database from the cluster default network
   ip_configuration = {
