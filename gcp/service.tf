@@ -17,7 +17,7 @@ resource "kubernetes_namespace" "example" {
 # Define the deployment
 resource "kubernetes_deployment" "terra-kion" {
   metadata {
-    name = "terra-kion"
+    name      = "terra-kion"
     namespace = kubernetes_namespace.example.metadata[0].name
   }
 
@@ -83,7 +83,7 @@ resource "kubernetes_deployment" "terra-kion" {
 # Define a Load Balanced service
 resource "kubernetes_service" "terra-kion" {
   metadata {
-    name = "terra-kion"
+    name      = "terra-kion"
     namespace = kubernetes_namespace.example.metadata[0].name
   }
 
