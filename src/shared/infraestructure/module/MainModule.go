@@ -53,6 +53,11 @@ func (m *MainModule) Setup() {
 
 		return c.JSONPretty(http.StatusOK, lastValues, "  ")
 	})
+
+	// This route checks health of the application
+	m.Bundle.Server.GET("/health", func(c echo.Context) error {
+		return c.String(http.StatusOK, "OK")
+	})
 }
 
 // Generates a random string of length n

@@ -79,7 +79,7 @@ resource "kubernetes_deployment" "terra-kion" {
           }
           readiness_probe {
             http_get {
-              path = "/"
+              path = "/health"
               port = 8080
             }
             initial_delay_seconds = 50
@@ -88,7 +88,7 @@ resource "kubernetes_deployment" "terra-kion" {
           }
           liveness_probe {
             http_get {
-              path = "/"
+              path = "/health"
               port = 8080
             }
             initial_delay_seconds = 200
