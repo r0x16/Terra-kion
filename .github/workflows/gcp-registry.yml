@@ -1,12 +1,12 @@
 ---
-name: Build and push containerized application to GCP Container Registry
+name: Builds and push application then deploy to GCP
 on:
   release:
     types:
       - published
 
 jobs:
-    build-and-push:
+    build-and-deploy:
         name: Builds container and push to GCP
         runs-on: ubuntu-latest
         env:
