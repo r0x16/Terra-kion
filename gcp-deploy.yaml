@@ -1,0 +1,35 @@
+---
+- name: Deploy to Production Environment
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: Build container and tag with git tag
+    shell: |
+      docker build -t $IMAGE_NAME:latest .
+      docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+      docker tag $IMAGE_NAME:latest gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+    register: docker_build
+  
+  - debug: var=docker_build.stdout
+  
+  - name: Configure Docker to use the gcloud command-line tool as a credential helper
+    shell: |
+      gcloud auth configure-docker
+    register: gcloud_configure_docker
+  
+  - debug: var=gcloud_configure_docker.stdout
+  
+  - name: Push Docker Image to Container Registry (GCR)
+    shell: |
+      docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:latest
+      docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$GIT_TAG
+  
+  - name: Prepare and apply Terraform Deployment
+    shell:
+      chdir: ./gcp
+      cmd: |
+        terraform init
+        terraform apply -auto-approve
+    register: terraform_apply
+
+  - debug: var=terraform_apply.stdout
